@@ -1,0 +1,15 @@
+This is a tiny tool to encode/decode Z-shell history file.
+
+In zsh history file, some functional bytes are escaped with meta
+character. As of it, non-ascii texts in history file are sometimes
+undecipherable.
+
+According to `init.c' of zsh, followings are meta characters.
+
+- 0x00, 0x83(Meta), 0x84(Pound)-0x9d(Nularg), 0xa0(Marker)
+
+For these bytes, 0x83(Meta) is preceded and target byte is `xor'ed
+with 0x20.
+
+This file provides encoder and decoder for these bytes, so that
+UTF-8 string in history file can be handled in Emacs.
